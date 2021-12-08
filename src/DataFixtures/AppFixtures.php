@@ -16,7 +16,6 @@ class AppFixtures extends Fixture
             $user->setPassword('password '.$i);
             $manager->persist($user);
         }
-
         $manager->flush();
     }
 }

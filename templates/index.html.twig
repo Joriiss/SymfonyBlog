@@ -26,5 +26,9 @@
             {% endfor %}
         </div>
         <a class="text-decoration-none" href="{{ path('newArticle') }}"> + Add an article</a>
+        <div class="container fixed-bottom pb-5">
+            Logged as : {{ app.user.username }} |
+            <a class="text-danger" href="{{ path('logout') }}">Logout</a>
+        </div>
     </div>
 {% endblock %}

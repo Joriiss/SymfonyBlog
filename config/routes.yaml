@@ -21,3 +21,5 @@ deleteArticle:
 register:
   path: /register
 
+logout:
+  path: /logout

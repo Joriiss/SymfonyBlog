@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\User;
 use App\Repository\ArticleRepository;
 use App\Form\ArticleType;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,19 +21,20 @@ class ArticleController extends AbstractController
 {
     /**
      * @param ArticleRepository $articleRepository
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(ArticleRepository $articleRepository)
     {
         $articles = $articleRepository->findAll();
         return $this->render('index.html.twig', [
-            'articles' => $articles,
+            'articles' => $articles
         ]);
     }
 
     /**
-     * @param ArticleRepository $articleRepository
-     * @return Response
+     * @param Request $request
+     * @param Article $article
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function article(Request $request, Article $article)
     {
@@ -43,9 +46,10 @@ class ArticleController extends AbstractController
     /**
      * @param Request $request
      * @param SluggerInterface $slugger
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newArticle(Request $request, SluggerInterface $slugger)
+    public function newArticle(Request $request, SluggerInterface $slugger, User $user)
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
@@ -84,7 +88,8 @@ class ArticleController extends AbstractController
     /**
      * @param Request $request
      * @param Article $article
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @param SluggerInterface $slugger
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function edit(Request $request, Article $article, SluggerInterface $slugger)
     {
