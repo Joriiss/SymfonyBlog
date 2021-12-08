@@ -46,10 +46,9 @@ class ArticleController extends AbstractController
     /**
      * @param Request $request
      * @param SluggerInterface $slugger
-     * @param User $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newArticle(Request $request, SluggerInterface $slugger, User $user)
+    public function newArticle(Request $request, SluggerInterface $slugger)
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
